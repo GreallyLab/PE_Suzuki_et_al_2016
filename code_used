@@ -1,0 +1,1167 @@
+### HELP-tagging analysis ###
+
+### PCA analysis  ###
+batch1=read.table("batch.txt",header=T,sep="\t")
+	mod0<-matrix(1,nrow=nrow(batch1),ncol=1)
+	mod<-model.matrix(~1 +batch1$PE,levels=c(as.character(unique(batch1$PE))))
+	edata = na.omit(angle_only_final)
+
+pca<-prcomp(angle_only_final)
+pca<-prcomp(combat_edata2)
+pca<-prcomp(combat_edata6)
+pca<-prcomp(edata)
+
+plot(pca)
+
+batch<-batch.p<-c()
+for (i in seq(1:10)){
+batch<-batch1$batch
+batch<-lm(pca$rotation[,i]~batch)
+batch.p<-c(batch.p, anova(batch)$Pr[1])
+}
+group<-group.p<-c()
+for (i in seq(1:10)){
+group<-batch1$PE
+group<-lm(pca$rotation[,i]~group)
+group.p<-c(group.p, anova(group)$Pr[1])
+}
+sex<-sex.p<-c()
+for (i in seq(1:10)){
+sex<-batch1$Sex
+sex<-lm(pca$rotation[,i]~sex)
+sex.p<-c(sex.p, anova(sex)$Pr[1])
+}
+age<-age.p<-c()
+for (i in seq(1:10)){
+age<-scale(batch1$MaternalAge)
+age<-lm(pca$rotation[,i]~age)
+age.p<-c(age.p, anova(age)$Pr[1])
+}
+BPsys<-BPsys.p<-c()
+for (i in seq(1:10)){
+BPsys<-batch1$SysMax
+BPsys<-lm(pca$rotation[,i]~BPsys)
+BPsys.p<-c(BPsys.p, anova(BPsys)$Pr[1])
+}
+BPdia<-BPdia.p<-c()
+for (i in seq(1:10)){
+BPdia<-batch1$DiaMax
+BPdia<-lm(pca$rotation[,i]~BPdia)
+BPdia.p<-c(BPdia.p, anova(BPdia)$Pr[1])
+}
+protein<-protein.p<-c()
+for (i in seq(1:10)){
+protein<-batch1$Proteinuria
+protein<-lm(pca$rotation[,i]~protein)
+protein.p<-c(protein.p, anova(protein)$Pr[1])
+}
+weight<-weight.p<-c()
+for (i in seq(1:10)){
+weight<-batch1$BabyWeight
+weight<-lm(pca$rotation[,i]~ weight)
+weight.p<-c(weight.p, anova(weight)$Pr[1])
+}
+week<-week.p<-c()
+for (i in seq(1:10)){
+week<-batch1$WeekGest
+week<-lm(pca$rotation[,i]~ week)
+week.p<-c(week.p, anova(week)$Pr[1])
+}
+race<-race.p<-c()
+for (i in seq(1:10)){
+race<-batch1$Race
+race<-lm(pca$rotation[,i]~ race)
+race.p<-c(race.p, anova(race)$Pr[1])
+}
+Obesity<-Obesity.p<-c()
+for (i in seq(1:10)){
+Obesity<-batch1$Obese
+Obesity<-lm(pca$rotation[,i]~Obesity)
+Obesity.p<-c(Obesity.p, anova(Obesity)$Pr[1])
+}
+Athma<-Athma.p<-c()
+for (i in seq(1:10)){
+Athma<-batch1$Asthma
+Athma<-lm(pca$rotation[,i]~Athma)
+Athma.p<-c(Athma.p, anova(Athma)$Pr[1])
+}
+Anemia<-Anemia.p<-c()
+for (i in seq(1:10)){
+    Anemia <-batch1$Anemia
+    Anemia <-lm(pca$rotation[,i]~ Anemia)
+    Anemia.p<-c(Anemia.p, anova(Anemia)$Pr[1])
+}
+Labetalol<-Labetalol.p<-c()
+for (i in seq(1:10)){
+    Labetalol <-batch1$Labetalol
+    Labetalol <-lm(pca$rotation[,i]~Labetalol)
+    Labetalol.p<-c(Labetalol.p, anova(Labetalol)$Pr[1])
+}
+MGSO4<-MGSO4.p<-c()
+for (i in seq(1:10)){
+    MGSO4 <-batch1$MgSO4
+    MGSO4 <-lm(pca$rotation[,i]~MGSO4)
+    MGSO4.p<-c(MGSO4.p, anova(MGSO4)$Pr[1])
+}
+FirstDelivery<-FirstDelivery.p<-c()
+for (i in seq(1:10)){
+    FirstDelivery<-batch1$FirstDelivery
+    FirstDelivery<-lm(pca$rotation[,i]~FirstDelivery)
+    FirstDelivery.p<-c(FirstDelivery.p, anova(FirstDelivery)$Pr[1])
+}
+NSVD<-NSVD.p<-c()
+for (i in seq(1:10)){
+    NSVD <-batch1$nsvd
+    NSVD <-lm(pca$rotation[,i]~NSVD)
+    NSVD.p<-c(NSVD.p, anova(NSVD)$Pr[1])
+}
+GDM<-GDM.p<-c()
+for (i in seq(1:10)){
+    GDM <-batch1$GDM
+    GDM <-lm(pca$rotation[,i]~GDM)
+    GDM.p<-c(GDM.p, anova(GDM)$Pr[1])
+}
+CHTN<-CHTN.p<-c()
+for (i in seq(1:10)){
+    CHTN <-batch1$CHTN
+    CHTN <-lm(pca$rotation[,i]~CHTN)
+    CHTN.p<-c(CHTN.p, anova(CHTN)$Pr[1])
+}
+HxPE<-HxPE.p<-c()
+for (i in seq(1:10)){
+    HxPE <-batch1$HxPE
+    HxPE <-lm(pca$rotation[,i]~ HxPE)
+    HxPE.p <-c(HxPE.p, anova(HxPE)$Pr[1])
+}
+
+str<-str.p<-c()
+for (i in seq(1:10)){
+    str <-batch1$str
+    str <-lm(pca$rotation[,i]~ str)
+    str.p <-c(str.p, anova(str)$Pr[1])
+}
+
+epi<-epi.p<-c()
+for (i in seq(1:10)){
+    epi <-batch1$epi
+    epi <-lm(pca$rotation[,i]~ epi)
+    epi.p <-c(epi.p, anova(epi)$Pr[1])
+}
+
+
+Hpa_1553647<-Hpa_1553647.p<-c()
+for (i in seq(1:10)){
+    Hpa_1553647 <-as.numeric(combat_edata2[row.names(combat_edata2)== 1553647,])
+    Hpa_1553647 <-lm(pca$rotation[,i]~ Hpa_1553647)
+    Hpa_1553647.p <-c(Hpa_1553647.p, anova(Hpa_1553647)$Pr[1])
+}
+Hpa_210409 <-Hpa_210409.p<-c()
+for (i in seq(1:10)){
+    Hpa_210409 <- as.numeric(combat_edata2[row.names(combat_edata2)== 210409,])
+    Hpa_210409 <-lm(pca$rotation[,i]~ Hpa_210409)
+    Hpa_210409.p <-c(Hpa_210409.p, anova(Hpa_210409)$Pr[1])
+}
+Hpa_621984 <-Hpa_621984.p<-c()
+for (i in seq(1:10)){
+    Hpa_621984 <- as.numeric(combat_edata2[row.names(combat_edata2)== 621984,])
+    Hpa_621984 <-lm(pca$rotation[,i]~ Hpa_621984)
+    Hpa_621984.p <-c(Hpa_621984.p, anova(Hpa_621984)$Pr[1])
+}
+
+Hpa_1553647<-Hpa_1553647.p<-c()
+for (i in seq(1:10)){
+    Hpa_1553647 <-as.numeric(combat_edata6[row.names(combat_edata6)== 1553647,])
+    Hpa_1553647 <-lm(pca$rotation[,i]~ Hpa_1553647)
+    Hpa_1553647.p <-c(Hpa_1553647.p, anova(Hpa_1553647)$Pr[1])
+}
+Hpa_210409 <-Hpa_210409.p<-c()
+for (i in seq(1:10)){
+    Hpa_210409 <- as.numeric(combat_edata6[row.names(combat_edata6)== 210409,])
+    Hpa_210409 <-lm(pca$rotation[,i]~ Hpa_210409)
+    Hpa_210409.p <-c(Hpa_210409.p, anova(Hpa_210409)$Pr[1])
+}
+Hpa_621984 <-Hpa_621984.p<-c()
+for (i in seq(1:10)){
+    Hpa_621984 <- as.numeric(combat_edata6[row.names(combat_edata6)== 621984,])
+    Hpa_621984 <-lm(pca$rotation[,i]~ Hpa_621984)
+    Hpa_621984.p <-c(Hpa_621984.p, anova(Hpa_621984)$Pr[1])
+}
+
+pvals.raw<-rbind(batch.p,age.p,BPsys.p,BPdia.p,Anemia.p,CHTN.p,GDM.p, FirstDelivery.p,group.p,HxPE.p,Labetalol.p,MGSO4.p,NSVD.p,Obesity.p,protein.p,race.p,sex.p,week.p,weight.p,Athma.p)
+# after combat #
+pvals.raw<-rbind(batch.p,age.p,BPsys.p,BPdia.p,Anemia.p,CHTN.p,GDM.p, FirstDelivery.p,group.p,HxPE.p,Labetalol.p,MGSO4.p,NSVD.p,Obesity.p,protein.p,race.p,sex.p,week.p,weight.p,Athma.p, Hpa_1553647.p,Hpa_210409.p,Hpa_621984.p)
+# after epithelial related HpaII removal 
+
+pvals.raw<-rbind(batch.p,age.p,BPsys.p,BPdia.p,Anemia.p,CHTN.p,GDM.p, FirstDelivery.p,group.p,HxPE.p,Labetalol.p,MGSO4.p,NSVD.p,Obesity.p,protein.p,race.p,sex.p,week.p,weight.p,Athma.p, Hpa_621984.p)
+
+pvals.raw<-data.matrix(pvals.raw)
+
+colnames(pvals.raw)<-c("PC 1", "PC 2", "PC 3", "PC 4", "PC 5", "PC 6", "PC 7", "PC 8", "PC 9","PC 10")
+pvals.raw
+
+##
+                        PC 1         PC 2         PC 3       PC 4         PC 5       PC 6        PC 7       PC 8       PC 9     PC 10
+batch.p         0.1065386297 7.302658e-05 0.0001500655 0.33381082 0.0001748653 0.08527438 0.529995021 0.03086365 0.50076497 0.2606824
+age.p           0.2568065202 4.177082e-01 0.6944845555 0.06944690 0.7431136771 0.17454469 0.531133283 0.78690513 0.44095332 0.8968520
+BPsys.p         0.0633588205 8.333250e-01 0.0099100638 0.63674492 0.7833141795 0.26140009 0.532794592 0.24483021 0.75469538 0.8051820
+BPdia.p         0.1562736658 6.110253e-01 0.0421829437 0.74127680 0.8508919036 0.54359714 0.332677990 0.40452578 0.51720360 0.3719533
+Anemia.p        0.9568114579 5.481047e-01 0.7396018065 0.31677269 0.7474158570 0.50993080 0.263136299 0.28409467 0.05117173 0.9661768
+CHTN.p          0.4050009817 6.793828e-01 0.0719068407 0.16929095 0.6125067707 0.23036473 0.229542177 0.65932432 0.28761312 0.1434629
+GDM.p           0.2793554490 6.903182e-01 0.5583074151 0.81422365 0.9581771147 0.93172321 0.800941449 0.71815937 0.05454077 0.2614857
+FirstDelivery.p 0.2890241996 5.482879e-01 0.0351842390 0.58269185 0.2266703099 0.70893271 0.011945039 0.68163931 0.44765203 0.5605560
+group.p         0.0505761451 1.827134e-01 0.5838780955 0.28630387 0.9912991586 0.68389702 0.021965450 0.69670616 0.43373670 0.7215506
+HxPE.p          0.1578595044 7.410603e-01 0.2034829144 0.01251406 0.4081100972 0.66425765 0.007006415 0.03224044 0.19307647 0.9912625
+Labetalol.p     0.4999685318 9.681880e-01 0.1730095300 0.10767978 0.1046741098 0.49519959 0.834172737 0.45162791 0.65815541 0.1558556
+MGSO4.p         0.1781140653 7.536532e-02 0.9162618470 0.91520757 0.3079302389 0.87204659 0.258521286 0.10249116 0.27852611 0.9539427
+NSVD.p          0.2756025880 2.142643e-01 0.7511257058 0.09903982 0.7640601645 0.18968865 0.779095813 0.95723099 0.57643551 0.1720757
+Obesity.p       0.9260883182 1.254218e-01 0.2430461942 0.86323425 0.7737616497 0.01016751 0.257998623 0.66727338 0.69546214 0.3226624
+protein.p       0.0897672170 2.344817e-01 0.1899984497 0.81825821 0.0196798283 0.75870277 0.028137750 0.61082367 0.49776140 0.3445136
+race.p          0.7551670770 4.533996e-02 0.5424291607 0.36152348 0.6969577241 0.74182581 0.987202507 0.39120171 0.32335033 0.2383947
+sex.p           0.5681772189 3.480194e-01 0.4751719347 0.02857255 0.8393624541 0.62327160 0.689352343 0.22337094 0.76791366 0.6422091
+week.p          0.3465719720 8.611750e-01 0.3472687152 0.16354385 0.5250757640 0.17505069 0.821800274 0.16681179 0.81479277 0.3932765
+weight.p        0.2500813417 7.434190e-01 0.2233102532 0.32409700 0.5890129055 0.30182817 0.366845145 0.11715143 0.79004742 0.2926547
+Athma.p         0.6721475647 3.367994e-01 0.3303399909 0.27735015 0.6356362350 0.83162090 0.796919336 0.14087104 0.42710297 0.3249048
+str.p           0.7497776934 5.159307e-09 0.0059786473 0.28518066 0.8373771874 0.19238849 0.010947513 0.61493539 0.92929728 0.4901565
+epi.p           0.0006885744 8.548873e-04 0.5204495945 0.04235026 0.1386925187 0.33690025 0.324160855 0.68396227 0.72161420 0.5146716
+##
+
+# Table S1 # 
+
+# of those batch.p,BPsys.p,BPdia.p,HxPE.p,weight.p,str.p,epi.p showed anova F-statistics <0.2 in PCA1
+
+batch<-batch1$batch
+batch<-lm(pca$rotation[,1]~batch)
+anova(batch)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value Pr(>F)
+batch      5 0.00034375 6.8749e-05  1.9135 0.1065
+Residuals 56 0.00201197 3.5928e-05
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+BPsys<-batch1$SysMax
+BPsys<-lm(pca$rotation[,1]~BPsys)
+anova(BPsys)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value  Pr(>F)  
+BPsys      1 0.00013259 1.3259e-04  3.5786 0.06336 .
+Residuals 60 0.00222312 3.7052e-05                  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+BPdia<-batch1$DiaMax
+BPdia<-lm(pca$rotation[,1]~BPdia)
+anova(BPdia)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value Pr(>F)
+BPdia      1 0.00007824 7.8243e-05  2.0613 0.1563
+Residuals 60 0.00227747 3.7958e-05               
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+
+HxPE <-batch1$HxPE
+HxPE <-lm(pca$rotation[,1]~ HxPE)
+anova(HxPE)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value Pr(>F)
+HxPE       1 0.00007766 7.7657e-05  2.0453 0.1579
+Residuals 60 0.00227806 3.7968e-05               
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+str<-batch1$str
+str <-lm(pca$rotation[,1]~ str)
+anova(str)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value Pr(>F)
+str        1 0.00000402 4.0240e-06  0.1027 0.7498
+Residuals 60 0.00235169 3.9195e-05               
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+epi<-batch1$epi
+epi <-lm(pca$rotation[,1]~ epi)
+anova(epi)
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+Analysis of Variance Table
+
+Response: pca$rotation[, 1]
+          Df     Sum Sq    Mean Sq F value    Pr(>F)    
+epi        1 0.00041459 0.00041459  12.815 0.0006886 ***
+Residuals 60 0.00194112 0.00003235                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+
+## combat to adjust batch ##
+
+#cor(batch1$SysMax,batch1$DiaMax)
+#[1] 0.7738617 ## SysMax and DiaMax are highly correlated.
+cor(as.numeric(edata[row.names(edata)== 1553647,]), as.numeric(edata[row.names(edata)== 210409,]))
+#[1]  0.3403853 ## str and epi are correlated.
+cor(as.numeric(edata[row.names(edata)== 1553647,]), as.numeric(edata[row.names(edata)== 621984,]))
+#[1] 0.1874641
+cor(as.numeric(edata[row.names(edata)== 210409,]), as.numeric(edata[row.names(edata)== 621984,]))
+#[1] -0.0008402357
+
+
+### Select MspI reference count is greater than4 ## MspI_ok
+edata <-angle_only_final[which(row.names(angle_only_final) %in% MspI_ok),]
+dim(edata)
+#[1] 654051     63
+edata2<-edata+0.1 
+source("http://bioconductor.org/biocLite.R")
+biocLite("sva")
+
+mod0<-matrix(1,nrow=nrow(batch1),ncol=1)
+mod<-model.matrix(~1 +batch1$PE,levels=c(as.character(unique(batch1$PE))))
+require("sva")
+combat_edata2 = ComBat(dat=edata2, batch=batch1$batch, mod=mod, par.prior=TRUE, prior.plots=FALSE)
+
+# PCA analysis after combat#
+                        PC 1         PC 2        PC 3       PC 4        PC 5         PC 6        PC 7       PC 8       PC 9      PC 10
+batch.p         0.8005972237 9.307598e-01 0.904609546 0.99935589 0.991141114 0.9594906413 0.799141134 0.99954118 0.96601989 0.99925251
+age.p           0.2719984310 2.282304e-01 0.700042921 0.16391933 0.998640852 0.6370826539 0.984301436 0.03695139 0.43239594 0.31928873
+BPsys.p         0.1058792969 8.321716e-01 0.012877943 0.62780832 0.650876438 0.1026085348 0.045569838 0.98184816 0.94292465 0.42023144
+BPdia.p         0.2873827485 7.377211e-01 0.049051586 0.36025634 0.906438974 0.3504968005 0.098919159 0.96259441 0.65928790 0.38914266
+Anemia.p        0.5395678665 9.577945e-02 0.687816525 0.43966076 0.732340185 0.6718936738 0.044649494 0.61585738 0.57182491 0.55955455
+CHTN.p          0.4685577703 8.599373e-01 0.123719187 0.57053700 0.586382431 0.5920502072 0.060654902 0.26761051 0.84092366 0.26729921
+GDM.p           0.3397224147 6.275860e-01 0.947421830 0.73362914 0.635487358 0.5885690500 0.323602097 0.28864897 0.73386557 0.32707384
+FirstDelivery.p 0.4230766767 9.131876e-01 0.368067695 0.30549180 0.747192537 0.9263892969 0.004286135 0.95641487 0.14305710 0.54653512
+group.p         0.1268924999 5.522599e-01 0.597089918 0.41074414 0.007982881 0.3674079117 0.086182628 0.76351128 0.08739152 0.85487665
+HxPE.p          0.3356743541 3.135430e-01 0.382253122 0.35581535 0.095016922 0.0002417428 0.180279192 0.30123542 0.41271455 0.97988765
+Labetalol.p     0.5422338978 7.857218e-01 0.004648532 0.64457296 0.412665207 0.8846398651 0.455751778 0.79733251 0.16144201 0.74108027
+MGSO4.p         0.1374370949 8.182796e-02 0.535948563 0.50666299 0.193429061 0.9376923010 0.299360803 0.95242692 0.67802816 0.80041312
+NSVD.p          0.4709271160 3.129235e-01 0.709631907 0.11159976 0.655119801 0.3868676096 0.740141676 0.96976264 0.80991335 0.09330425
+Obesity.p       0.9602332644 5.135074e-01 0.353147762 0.58546849 0.599705572 0.6582901861 0.097651539 0.01906461 0.95035594 0.35389892
+protein.p       0.0505675851 2.886370e-01 0.034652607 0.82934140 0.085557657 0.8491016425 0.100194338 0.13756017 0.42334914 0.08310467
+race.p          0.5740484003 4.062964e-02 0.483560715 0.53497737 0.728744487 0.4347629056 0.794320588 0.98995227 0.12729852 0.30118577
+sex.p           0.3169284353 2.214889e-01 0.446822096 0.01677130 0.412448647 0.2028509879 0.411397875 0.88346718 0.66250147 0.83316249
+week.p          0.3848899265 9.754355e-01 0.584560811 0.51396664 0.852212207 0.0454031964 0.860887939 0.03811456 0.28942721 0.39060625
+weight.p        0.2903532701 8.103888e-01 0.422508852 0.57660084 0.588210914 0.0235987706 0.724038064 0.04264649 0.46753052 0.70682978
+Athma.p         0.7566351396 6.938613e-01 0.243807209 0.61894344 0.926900722 0.9665331571 0.291820571 0.67977241 0.01691328 0.63412223
+Hpa_1553647.p   0.1295762369 1.396417e-09 0.010788241 0.16121886 0.180135417 0.1259236115 0.637620323 0.96316654 0.28532700 0.41272303
+Hpa_210409.p    0.0001698403 5.442595e-04 0.474297334 0.03016878 0.641451598 0.9773556325 0.800505528 0.48714474 0.60999631 0.29004663
+Hpa_621984.p    0.8658276551 3.558855e-01 0.482942353 0.32144818 0.044359019 0.1493846914 0.112572384 0.10851602 0.76375238 0.45467775
+
+# Table S1 #
+
+lm_pro <- lm(as.numeric(combat_edata2[row.names(combat_edata2)== 210409,])~ batch1$Proteinuria)
+cor(batch1$SysMax,as.numeric(combat_edata2[row.names(combat_edata2)== 210409,]))
+#[1]-0.04684951
+
+lm_pro <- lm(as.numeric(combat_edata2[row.names(combat_edata2)== 1553647,])~ batch1$Proteinuria)
+cor(batch1$SysMax,as.numeric(combat_edata2[row.names(combat_edata2)== 1553647,]))
+#[1] -0.05757211
+
+lm_pro <- lm(as.numeric(combat_edata2[row.names(combat_edata2)== 621984,])~ batch1$Proteinuria)
+cor(batch1$SysMax,as.numeric(combat_edata2[row.names(combat_edata2)== 621984,]))
+#[1] -0.175328
+
+# Hpa_210409.p
+
+test<- lm(formula = as.numeric(combat_edata2[row.names(combat_edata2) ==210409, ]) ~ batch1$Proteinuria)
+summary(test)
+Call:
+lm(formula = as.numeric(combat_edata2[row.names(combat_edata2) == 
+    210409, ]) ~ batch1$Proteinuria)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-27.918 -11.002  -1.202  11.982  29.814 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            27.606      2.695  10.243 1.27e-14 ***
+batch1$Proteinuria1+   13.885      5.014   2.769  0.00754 ** 
+batch1$Proteinuria2+   -9.136      6.027  -1.516  0.13498    
+batch1$Proteinuria3+    1.702      5.752   0.296  0.76845    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 15.25 on 58 degrees of freedom
+Multiple R-squared:  0.1799,  Adjusted R-squared:  0.1375 
+F-statistic: 4.241 on 3 and 58 DF,  p-value: 0.008892
+
+# Hpa_1553647.p
+test<- lm(formula = as.numeric(combat_edata2[row.names(combat_edata2) ==1553647, ]) ~ batch1$Proteinuria)
+summary(test)
+
+Call:
+lm(formula = as.numeric(combat_edata2[row.names(combat_edata2) == 
+    1553647, ]) ~ batch1$Proteinuria)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-39.096  -9.209   3.598   9.821  33.494 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            46.827      2.929  15.986   <2e-16 ***
+batch1$Proteinuria1+    2.214      5.450   0.406    0.686    
+batch1$Proteinuria2+    6.639      6.550   1.014    0.315    
+batch1$Proteinuria3+   -3.163      6.252  -0.506    0.615    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 16.57 on 58 degrees of freedom
+Multiple R-squared:  0.02809,  Adjusted R-squared:  -0.02218 
+F-statistic: 0.5588 on 3 and 58 DF,  p-value: 0.6443
+
+# Hpa_621984
+Call:
+lm(formula = as.numeric(combat_edata2[row.names(combat_edata2) == 
+    621984, ]) ~ batch1$Proteinuria)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-37.605 -17.906   3.081  16.188  42.477 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            31.879      3.895   8.185 3.01e-11 ***
+batch1$Proteinuria1+  -15.524      7.247  -2.142   0.0364 *  
+batch1$Proteinuria2+   -7.264      8.710  -0.834   0.4077    
+batch1$Proteinuria3+    2.199      8.314   0.265   0.7923    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 22.03 on 58 degrees of freedom
+Multiple R-squared:  0.08657,  Adjusted R-squared:  0.03932 
+F-statistic: 1.832 on 3 and 58 DF,  p-value: 0.1513
+
+### removing Epithelial:stromal ratio dependent emthylation variations ###
+# edata is combat adjusted methylation value table #
+
+#cor_epi <- matrix(nrow=dim(edata)[1],ncol=2)
+#for(i in 1:dim(edata)[1])
+#cor_epi[i,2] <- cor(c(as.numeric(edata[row.names(edata)== 1553647,])),c(as.numeric(edata[i,])),method="spearman") 
+#cor_epi[,1]<-row.names(edata)
+
+cor_epi table
+# Supporting table 6
+
+
+## eliminate epi associated HpaII sites ##
+ind <-cor_epi[which(abs(cor_epi[,2])<0.3),]
+dim(ind)
+#[1] 545961      2
+
+combat_edata6<-edata[which(row.names(edata)%in%ind[,1]),]
+dim(combat_edata6)
+#[1] 545961     62
+
+edata2 <-combat_edata6
+for(i in 1:dim(combat_edata6)[2])
+  edata2[which(combat_edata6[,i]<0),i] <-0
+for(i in 1:dim(combat_edata6)[2])
+  edata2[which(combat_edata6[,i]>100),i] <-100
+edata <-edata2
+
+infor <- angle[which(row.names(angle)%in%row.names(combat_edata6)),2:3]
+Ana_Hpa <-cbind(as.character(infor[,1]),infor[,2]-1,infor[,2]+2)
+write.table(Ana_Hpa,"hpa.bed",sep="\t",quote=F,col.names=F,row.names=F)
+
+### PCA after Epi/Str related HpaII removal ## 
+                      PC 1       PC 2       PC 3        PC 4        PC 5       PC 6         PC 7       PC 8       PC 9      PC 10
+batch.p         0.79475734 0.96953690 0.93688397 0.997451437 0.995852669 0.69351743 0.9963144020 0.99983068 0.98720943 0.77110029
+age.p           0.30169002 0.53101904 0.50767375 0.049959647 0.542148516 0.83781771 0.1599026547 0.31699287 0.59055442 0.03381674
+BPsys.p         0.11664334 0.10453433 0.05960154 0.799881222 0.729049383 0.01329867 0.5693293794 0.63309819 0.78026520 0.55880166
+BPdia.p         0.31525103 0.38697076 0.05750484 0.619576935 0.935015122 0.07544913 0.9727745420 0.83991766 0.45137757 0.72012119
+Anemia.p        0.58735475 0.09187558 0.45331158 0.465919101 0.935757667 0.12115241 0.1914845199 0.46602866 0.94629080 0.27401056
+CHTN.p          0.49256725 0.41983722 0.20051994 0.188278338 0.932764899 0.07069449 0.9397443147 0.57454671 0.79683968 0.05260801
+GDM.p           0.35667826 0.72862281 0.97986782 0.795962624 0.566747113 0.63151792 0.3313738087 0.27001862 0.43162994 0.22682486
+FirstDelivery.p 0.49451007 0.52702144 0.31617134 0.607793167 0.786054776 0.01517059 0.1440361780 0.70408820 0.24461941 0.23490975
+group.p         0.11713806 0.76389690 0.33606459 0.114339170 0.046668744 0.13087210 0.1423505700 0.88885247 0.13105414 0.72190588
+HxPE.p          0.36208824 0.92081072 0.53089410 0.033521622 0.634340544 0.58551029 0.0006493423 0.24759380 0.20186488 0.76463504
+Labetalol.p     0.46649363 0.17790425 0.01494844 0.165655383 0.719614901 0.52070771 0.8535269605 0.55909985 0.24107618 0.47687498
+MGSO4.p         0.13688967 0.25447636 0.05981927 0.679827218 0.327411454 0.43126482 0.6962243722 0.82758485 0.48036715 0.35604269
+NSVD.p          0.43594059 0.57664860 0.64051222 0.038169190 0.872381466 0.72672434 0.7300291550 0.49578988 0.28904691 0.23211325
+Obesity.p       0.93347718 0.92828559 0.08606533 0.567308938 0.260536019 0.23161468 0.7902684571 0.09729994 0.94623521 0.02577884
+protein.p       0.04183026 0.05996949 0.20253696 0.904512439 0.180895721 0.11489185 0.7995592711 0.05415492 0.19916138 0.41301122
+race.p          0.55643363 0.73765821 0.25800882 0.318022595 0.729389147 0.61988831 0.5280355011 0.74412910 0.16968005 0.20000170
+sex.p           0.39093260 0.71711704 0.63700454 0.003873872 0.865081048 0.14626830 0.9226974713 0.49179224 0.94330512 0.41865159
+week.p          0.46570383 0.69449782 0.93027593 0.167792990 0.311909555 0.35207753 0.3912884834 0.08864736 0.11563809 0.43906113
+weight.p        0.31673737 0.41083948 0.98173916 0.117486602 0.686353854 0.17502067 0.2952463593 0.09168025 0.34190647 0.77996488
+Athma.p         0.72703402 0.63146544 0.32674896 0.356169237 0.781777893 0.50277951 0.9178760574 0.68406147 0.01402558 0.75389436
+Hpa_621984.p    0.77615206 0.54067874 0.05629151 0.991535550 0.007607746 0.35404707 0.2615597455 0.32923606 0.57945153 0.19490819
+## Hpa_1553647 and Hpa_210409 were eliminated with this cut off
+# Table S1 #
+
+## adjust <0 to 0 and >100 as 100
+
+edata2 <-combat_edata6
+for(i in 1:dim(combat_edata6)[2])
+edata2[which(combat_edata6[,i]<0),i] <-0
+for(i in 1:dim(combat_edata6)[2])
+edata2[which(combat_edata6[,i]>100),i] <-100
+edata <-edata2
+
+## systolic blood pressure ## model 1 ##
+lm_Sys <- matrix(nrow=dim(edata)[1],ncol=2)
+for(i in 1:dim(edata)[1])
+lm_Sys[i,2] <-lmp(lm(as.numeric(edata[i,])~ batch1$SysMax))
+colnames(lm_Sys)<-c("id","lm_Sys_p")
+lm_Sys[,1] <-row.names(combat_edata6)
+
+p <-lm_Sys[,2]
+padjust <-p.adjust(p,method="BH")
+lm_Sys_ad <- cbind(lm_Sys, padjust)
+
+values<- combat_edata6[,colnames(combat_edata6)%in%batch1$SampleID]
+values2<-values[which(rowSums(values)>6.5),]
+
+lm_Sys_ad_n0 <-lm_Sys_ad[which(lm_Sys_ad[,1]%in%row.names(values2)),]
+
+infor <- angle[which(row.names(angle) %in% lm_Sys_ad_n0[,1]),2:3]
+chr <-substr(infor[,1],4,length(infor[,1]))
+chr <-as.numeric(chr)
+sample <-cbind(as.numeric(chr), as.numeric(infor[,2]), as.numeric(lm_Sys_ad_n0[,2]),as.numeric(row.names(infor)))
+sample<-data.frame(sample)
+row.names(sample) <-row.names(infor)
+colnames(sample) <-c("CHR","BP","P","SNP")
+
+# p (FDR) <0.05 #
+lm_Sys_ad_n0_sig <-lm_Sys_ad_n0[which(lm_Sys_ad_n0[,3]<5e-2),]
+dim(lm_Sys_ad_n0_sig)
+#[1] 286   3
+sig_id <-lm_Sys_ad_n0_sig[,1]
+
+sample_sig_Sys <- infor[which(row.names(infor) %in% lm_Sys_ad_n0_sig[,1]),]
+Sys_all <-cbind(as.character(sample_sig_Sys[,1]),sample_sig_Sys[,2]-1,sample_sig_Sys[,2]+2,row.names(sample_sig_Sys))
+write.table(Sys_all,file="~/Documents/Greally_lab/PE_project/2015_analysis/Sys_all.txt", sep="\t", quote=F, row.names=F, col.names=F)
+
+median_values <- matrix(ncol=3,nrow=dim(sample_sig_Sys)[1])
+
+for (i in 1:dim(sample_sig_Sys)[1]){
+median_values[i,1] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Sys)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Cont"),2]]))
+median_values[i,2] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Sys)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="PE"),2]]))
+median_values[i,3] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Sys)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Hypertension"),2]]))
+}
+
+sig_info <-cbind(sample_sig_Sys, median_values)
+
+dif1 <-abs(sig_info[,3]-sig_info[,4])
+dif2 <-abs(sig_info[,3]-sig_info[,5])
+dif3 <-abs(sig_info[,4]-sig_info[,5])
+
+sig_info_diff10<-sig_info[which(dif1>10),]
+dim(sig_info_diff10)
+#[1] 123   5
+
+sig_info_Sys <-cbind(sig_info_diff10, lm_Sys_ad_n0_sig[which(lm_Sys_ad_n0_sig[,1]%in% row.names(sig_info_diff10)),])
+write.csv(sig_info_Sys,file="sig_info_Sys.csv")
+# Table S3 #
+
+sig_info_Sys_bed <-cbind(as.character(sig_info_Sys[,1]),sig_info_Sys[,2]-1,sig_info_Sys[,2]+2)
+write.table(sig_info_Sys_bed,file="sig_info_Sys.bed",sep="\t",quote=F,row.names=F,col.names=F)
+
+
+## Proteinuria ## model 2
+
+lm_Pro <- matrix(nrow=dim(edata)[1],ncol=2)
+for(i in 1:dim(edata)[1])
+lm_Pro[i,2] <-lmp(lm(as.numeric(edata[i,])~ batch1$Proteinuria))
+colnames(lm_Pro)<-c("id","lm_Pro_p")
+lm_Pro[,1] <-row.names(combat_edata6)
+
+
+p <-lm_Pro[,2]
+padjust <-p.adjust(p,method="BH")
+lm_Pro_ad <- cbind(lm_Pro, padjust)
+
+values<- combat_edata6[,colnames(combat_edata6)%in%batch1$SampleID]
+values2<-values[which(rowSums(values)>6.5),]
+
+lm_Pro_ad_n0 <-lm_Pro_ad[which(lm_Pro_ad[,1]%in%row.names(values2)),]
+
+infor <- angle[which(row.names(angle) %in% lm_Pro_ad_n0[,1]),2:3]
+chr <-substr(infor[,1],4,length(infor[,1]))
+chr <-as.numeric(chr)
+sample <-cbind(as.numeric(chr), as.numeric(infor[,2]), as.numeric(lm_Pro_ad_n0[,2]),as.numeric(row.names(infor)))
+sample<-data.frame(sample)
+colnames(sample) <-c("CHR","BP","P","SNP")
+
+# p (FDR) <0.05 #
+lm_Pro_ad_n0_sig <-lm_Pro_ad_n0[which(lm_Pro_ad_n0[,3]<5e-2),]
+dim(lm_Pro_ad_n0_sig)
+#[1] 753   3
+sig_id <-lm_Pro_ad_n0_sig[,1]
+
+sample_sig_Pro <- infor[which(row.names(infor) %in% lm_Pro_ad_n0_sig[,1]),]
+Pro_all <-cbind(as.character(sample_sig_Pro[,1]),sample_sig_Pro[,2]-1,sample_sig_Pro[,2]+2,row.names(sample_sig_Pro))
+write.table(Pro_all,file="~/Documents/Greally_lab/PE_project/2015_analysis/Pro_all.txt", sep="\t", quote=F, row.names=F, col.names=F)
+
+
+sample_sig_Pro <- infor[which(row.names(infor) %in% lm_Pro_ad_n0_sig[,1]),]
+chr_pro <-substr(sample_sig_Pro[,1],4,length(sample_sig_Pro[,1]))
+chr_pro <-as.numeric(chr_pro)
+sample_sig_Pro<-cbind(chr_pro, sample_sig_Pro[,2], lm_Pro_ad_n0_sig[,2:3])
+colnames(sample_sig_Pro) <-c("CHR","BP","P","SNP")
+
+sample_sig_Pro <- infor[which(row.names(infor) %in% lm_Pro_ad_n0_sig[,1]),]
+median_values <- matrix(ncol=3,nrow=dim(sample_sig_Pro)[1])
+
+for (i in 1:dim(sample_sig_Pro)[1]){
+median_values[i,1] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Pro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Cont"),2]]))
+median_values[i,2] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Pro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="PE"),2]]))
+median_values[i,3] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_Pro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Hypertension"),2]]))
+}
+
+sig_info <-cbind(sample_sig_Pro, median_values)
+
+dif1 <-abs(sig_info[,3]-sig_info[,4])
+dif2 <-abs(sig_info[,3]-sig_info[,5])
+dif3 <-abs(sig_info[,4]-sig_info[,5])
+
+sig_info_diff10<-sig_info[which(dif1>10),]
+dim(sig_info_diff10)
+#[1] 85  5
+
+sig_info_Pro <-cbind(sig_info_diff10, lm_Pro_ad_n0_sig[which(lm_Pro_ad_n0_sig[,1]%in% row.names(sig_info_diff10)),])
+# Table S3 #
+
+sig_info_Pro_bed <-cbind(as.character(sig_info_Pro[,1]),sig_info_Pro[,2]-1,sig_info_Pro[,2]+2)
+write.table(sig_info_Pro_bed,file="sig_info_Pro.bed",sep="\t",quote=F,row.names=F,col.names=F)
+
+## systolic blood pressure and proteinuria # model 3 
+
+lm_SysPro <- matrix(nrow=dim(edata)[1],ncol=2)
+for(i in 1:dim(edata)[1])
+lm_SysPro[i,2] <-lmp(lm(as.numeric(edata[i,])~ batch1$SysMax+batch1$Proteinuria))
+colnames(lm_SysPro)<-c("id","lm_SysPro_p")
+
+lm_SysPro[,1] <-row.names(combat_edata6)
+
+p <-lm_SysPro[,2]
+padjust <-p.adjust(p,method="BH")
+lm_SysPro_ad <- cbind(lm_SysPro, padjust)
+
+values<- combat_edata6[,colnames(combat_edata6)%in%batch1$SampleID]
+values2<-values[which(rowSums(values)>6.5),]
+
+lm_SysPro_ad_n0 <-lm_SysPro_ad[which(lm_SysPro_ad[,1]%in%row.names(values2)),]
+
+infor <- angle[which(row.names(angle) %in% lm_SysPro_ad_n0[,1]),2:3]
+chr <-substr(infor[,1],4,length(infor[,1]))
+chr <-as.numeric(chr)
+sample <-cbind(as.numeric(chr), as.numeric(infor[,2]), as.numeric(lm_SysPro_ad_n0[,2]), as.numeric(row.names(infor)))
+sample<-data.frame(sample)
+colnames(sample) <-c("CHR","BP","P","SNP")
+
+# p (FDR) <0.05 #
+lm_SysPro_ad_n0_sig <-lm_SysPro_ad_n0[which(lm_SysPro_ad_n0[,3]<5e-2),]
+dim(lm_SysPro_ad_n0_sig)
+#[1] 778   3
+sig_id <-lm_SysPro_ad_n0_sig[,1]
+
+sample_sig_SysPro <- infor[which(row.names(infor) %in% lm_SysPro_ad_n0_sig[,1]),]
+SysPro_all <-cbind(as.character(sample_sig_SysPro[,1]),sample_sig_SysPro[,2]-1,sample_sig_SysPro[,2]+2,row.names(sample_sig_SysPro))
+write.table(SysPro_all,file="~/Documents/Greally_lab/PE_project/2015_analysis/SysPro_all.txt", sep="\t", quote=F, row.names=F, col.names=F)
+
+
+sample_sig_SysPro <- infor[which(row.names(infor) %in% lm_SysPro_ad_n0_sig[,1]),]
+median_values <- matrix(ncol=3,nrow=dim(sample_sig_SysPro)[1])
+
+for (i in 1:dim(sample_sig_SysPro)[1]){
+median_values[i,1] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_SysPro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Cont"),2]]))
+median_values[i,2] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_SysPro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="PE"),2]]))
+median_values[i,3] <- median(as.numeric(combat_edata6[row.names(combat_edata6)==row.names(sample_sig_SysPro)[i] ,colnames(combat_edata6)%in%batch1[which(batch1$PE=="Hypertension"),2]]))
+}
+
+sig_info <-cbind(sample_sig_SysPro, median_values,lm_SysPro_ad_n0_sig)
+
+dif1 <-abs(sig_info[,3]-sig_info[,4])
+dif2 <-abs(sig_info[,3]-sig_info[,5])
+dif3 <-abs(sig_info[,4]-sig_info[,5])
+
+sig_info_diff10<-sig_info[which(dif1>10),]
+dim(sig_info_diff10)
+#dim(sig_info_diff10)
+[1] 99  8
+
+sig_info_SysPro <-cbind(sig_info_diff10, lm_SysPro_ad_n0_sig[which(lm_SysPro_ad_n0_sig[,1]%in% row.names(sig_info_diff10)),])
+
+# Table S3 #
+
+sig_info_SysPro_bed <-cbind(as.character(sig_info_SysPro[,1]),sig_info_SysPro[,2]-1,sig_info_SysPro[,2]+2)
+write.table(sig_info_SysPro_bed,file="sig_info_SysPro.bed",sep="\t",quote=F,row.names=F,col.names=F)
+
+
+## write venn diagram
+
+ID_SysPro <-row.names(sig_info_SysPro)
+ID_Pro <-row.names(sig_info_Pro)
+ID_Sys <-row.names(sig_info_Sys)
+
+ID.i <-list(SysPro=ID_SysPro, Sys=ID_Sys, Pro=ID_Pro)
+venn(ID.i)
+#saved as venn_fdr05.pdf
+
+ID <-c(ID_SysPro, ID_Sys, ID_Pro)
+
+ID_unique <-unique(ID)
+length(ID_unique)
+[1] 241
+"%w/o%" <- function(x, y) x[!x %in% y]
+
+## Proteinuria assiciated ##
+ID_p <-c(ID_Pro,ID_SysPro%w/o%ID_Sys)
+length(unique(ID_p))
+
+infor <- angle[which(row.names(angle) %in% ID_p),2:3]
+ProAssociated_bed <-cbind(as.character(infor[,1]),infor[,2]-1,infor[,2]+2)
+dim(ProAssociated_bed)
+
+#[1] 118   3
+write.table(ProAssociated_bed,file="ProAssociated.bed",sep="\t",quote=F, row.names=F,col.names=F)
+
+## hypertension associated ##
+
+infor <- angle[which(row.names(angle) %in% ID_Sys),2:3]
+SysAssociated_bed <-cbind(as.character(infor[,1]),infor[,2]-1,infor[,2]+2)
+dim(SysAssociated_bed)
+
+#[1] 123   3
+
+write.table(SysAssociated_bed,file="SysAssociated.bed",sep="\t",quote=F, row.names=F,col.names=F)
+
+### Hpa_1775280, gestational age and weight ###
+
+## gestational week ##
+test<- lm(formula = as.numeric(combat_edata6[row.names(combat_edata6) ==1775280, ]) ~ batch1$WeekGest)
+summary(test)
+
+Call:
+lm(formula = as.numeric(combat_edata6[row.names(combat_edata6) == 
+    1775280, ]) ~ batch1$WeekGest)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-41.325  -9.791   2.952  10.217  32.397 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     -107.864     41.159  -2.621 0.011102 *  
+batch1$WeekGest    3.986      1.075   3.709 0.000457 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 17.1 on 60 degrees of freedom
+Multiple R-squared:  0.1865,  Adjusted R-squared:  0.1729 
+F-statistic: 13.75 on 1 and 60 DF,  p-value: 0.0004573
+
+## Weight at birth  ##
+test<- lm(formula = as.numeric(combat_edata6[row.names(combat_edata6) ==1775280, ]) ~ batch1$BabyWeight)
+summary(test)
+
+Call:
+lm(formula = as.numeric(combat_edata6[row.names(combat_edata6) == 
+    1775280, ]) ~ batch1$BabyWeight)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-40.051 -10.454   1.437  10.962  33.338 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)   
+(Intercept)       17.554269  10.126036   1.734  0.08813 . 
+batch1$BabyWeight  0.008750   0.003197   2.737  0.00814 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 17.87 on 60 degrees of freedom
+Multiple R-squared:  0.111,  Adjusted R-squared:  0.0962 
+F-statistic: 7.493 on 1 and 60 DF,  p-value: 0.00814
+
+
+
+### testing variability between each group ###
+
+var_PE <- matrix(nrow=dim(edata)[1],ncol=3)
+for(i in 1:dim(edata)[1]){
+  var_PE[i,1] <-var.test(as.numeric(edata[i,which(colnames(edata)%in%batch1[which(batch1$PE=="PE"),2])]), as.numeric(edata[i,which(colnames(edata)%in%batch1[which(batch1$PE=="Cont"),2])]))$p.value
+  var_PE[i,2] <-as.numeric(var.test(as.numeric(edata[i,which(colnames(edata)%in%batch1[which(batch1$PE=="PE"),2])]), as.numeric(edata[i,which(colnames(edata)%in%batch1[which(batch1$PE=="Cont"),2])]))$estimate)
+}
+fdr <- p.adjust(var_PE[,1],method="BH")
+plot(density(-log10(padjust)))
+var_PE[,3] <-fdr
+row.names(var_PE) <-row.names(edata)
+colnames(var_PE) <-c("row_pval","RatioVariance","FDR_pval")
+infor <- angle[which(row.names(angle) %in% row.names(edata)),2:3]
+chr <-substr(infor[,1],4,length(infor[,1]))
+chr <-as.numeric(chr)
+sample <-cbind(as.numeric(chr), as.numeric(infor[,2]), as.numeric(var_PE[,1]),as.numeric(row.names(var_PE)))
+sample<-data.frame(sample)
+colnames(sample) <-c("CHR","BP","P","SNP")
+
+sample[,3] <-var_PE[,3]+1e-25
+
+var_sig <-var_PE[which(var_PE[,3]<1.0e-7&var_PE[,2]>20),]
+var_inf <-infor[which(row.names(infor)%in%row.names(var_sig)),]
+
+chr_var <-substr(var_inf[,1],4,length(var_inf[,1]))
+chr_var <-as.numeric(chr_var)
+sample_var <-cbind(as.numeric(chr_var), as.numeric(var_inf[,2]), as.numeric(var_sig[,3]))
+sample_var<-data.frame(sample_var)
+colnames(sample_var) <-c("CHR","BP","P")
+
+sample_var[,3] <-var_sig[,3]+1e-14
+
+var_sig_infor <-cbind(var_inf,var_sig)
+dim(var_sig_infor)
+# [1] 4058    5
+# Table S5 #
+
+var_bed <-cbind(as.character(var_inf[,1]),var_inf[,2]-1,var_inf[,2]+2,var_sig[,2])
+dim(var_bed)
+#[1] 4058    4
+
+write.table(var_bed,file="sig_var.bed",sep="\t",quote=F,row.names=F,col.names=F)
+
+
+########## RNA_seq ##########
+### testing association between expression  ###
+
+#### NOIseq  ####
+require(xtable)
+require(biomaRt)
+require(edgeR)
+require(DESeq2)
+require(NOISeq)
+
+## rna-seq analysis
+
+g_sample2 <-read.table("submission_htseq.union.out.txt",sep="\t",header=TRUE)
+g_sample3 <-g_sample2[6: 51801,]
+
+libsizes <-c(seq(1,dim(g_sample3)[2]))
+for(i in 1:length(libsizes))
+libsizes[i]<-sum(g_sample3[,i])
+
+require(biomaRt)
+library(biomaRt)
+ensembl <- useEnsembl("ensembl")
+ensembl <- useDataset("hsapiens_gene_ensembl",mart = ensembl)
+martGenes <- getBM(attributes = c("ensembl_gene_id", "hgnc_symbol", "description", "entrezgene","gene_biotype","percentage_gc_content","chromosome_name","start_position","end_position"), filters = "ensembl_gene_id", values = rownames(g_sample3), mart = ensembl,uniqueRows = T)
+first <- function(x) {
+    if (length(x) > 1) {
+        return(x[1])
+    }
+    else {
+        return(x)
+        
+    }
+}
+syms <- aggregate(hgnc_symbol ~ ensembl_gene_id, data = martGenes, FUN = first)
+desc <- aggregate(description ~ ensembl_gene_id,data = martGenes, FUN = paste, collapse = ", ")
+entrez <- aggregate(entrezgene ~ ensembl_gene_id,data = martGenes, FUN = first)
+bt <- aggregate(gene_biotype ~ ensembl_gene_id,data = martGenes, FUN = paste, collapse = ", ")
+gc <- aggregate(percentage_gc_content ~ ensembl_gene_id,data = martGenes, FUN = first)
+chr <- aggregate(chromosome_name ~ ensembl_gene_id,data = martGenes, FUN = first)
+st <- aggregate(start_position ~ ensembl_gene_id,data = martGenes, FUN = first)
+en <- aggregate(end_position ~ ensembl_gene_id,data = martGenes, FUN = first)
+
+
+genes <- data.frame(cbind(syms[match(rownames(g_sample3),syms[, 1]), 2], desc[match(rownames(g_sample3),desc[, 1]), 2], entrez[match(rownames(g_sample3),entrez[, 1]), 2], bt[match(rownames(g_sample3),bt[, 1]), 2],chr[match(rownames(g_sample3),chr[, 1]), 2],st[match(rownames(g_sample3),st[, 1]), 2],en[match(rownames(g_sample3),en[, 1]), 2],gc[match(rownames(g_sample3),gc[, 1]), 2]))
+rownames(genes) <- rownames(g_sample3)
+colnames(genes) <- c("sybmol", "description","entrezID", "biotype","chr","start","end","gc_per")
+genes[, 2] <- gsub("\\[.*?\\]", "", genes[, 2])
+
+condition <-
+c("Cont","Cont","PE","PE","PE","PE","PE","PE","PE","PE","PE","Cont","PE","Cont","PE","PE","PE","PE","Cont","PE","Cont","Cont","Cont","Cont","PE","PE","Cont","Cont","Cont")
+sampleID <-
+c("JG21","JG25","JG28","JG29","JG30","JG31","JG32","JG33","JG18","JG20","JG40","JG8b","JG39","JG43","JG55","JG56","JG58","JG63","JG69","JG73","JG75","JG90","JG93","JG95","JG1","JG3","JG5","JG6","JG8")
+colnames(g_sample3)<-sampleID
+batch <-
+c("AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","AC1AT0ACXX","BD1FAFACXX","BD1FAFACXX","BD1FAFACXX","BD1FAFACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC29H2ACXX","AC0NMYACXX","AC0NMYACXX","BD1FAFACXX","AC0NMYACXX","AC0NMYACXX")
+batch <- factor(batch)
+cond <- condition
+
+con_batch <-cbind(condition,batch)
+con_batch2 <-paste(con_batch[,1], con_batch[,2],sep="_")
+
+cds <- DGEList(counts = g_sample3, group = cond, genes = genes)
+d.cpm <- cpm(cds)
+cds <- cds[rowSums(d.cpm > 1) >=4, ]
+cds$sample$lib.size <- colSums(cds$counts)
+cds <- calcNormFactors(cds)
+
+grp <- factor(cond)
+design <- model.matrix(~batch+grp)
+cds <- estimateGLMCommonDisp(cds, design, verbose = T)
+cds <- estimateGLMTrendedDisp(cds, design)
+cds <- estimateGLMTagwiseDisp(cds, design)
+fit <- glmFit(cds, design)
+lrt <- glmLRT(fit, coef = 2)
+
+fit_table <-lrt$table
+fdr <-p.adjust(fit_table$PValue, method="fdr")
+fit_table2 <-cbind(fit_table,fdr)
+normalized4 =merge(genes, fit_table,by="row.names")
+normalized5 <-na.omit(normalized4)
+
+BatchAdj_val= normalized5 ## edgeR normalized count (estimateGLMTagwiseDisp) >> batch adjusted
+
+myGenes <-genes[which(row.names(genes)%in%BatchAdj_val[,1]),]
+mylength<-as.numeric(myGenes[,7])-as.numeric(myGenes[,6])
+mychroms <-myGenes[,5:7]
+rownames(mychroms) <-rownames(myGenes)
+colnames(mychroms) <-c("Chr","GeneStart","GeneEnd")
+gc_per <-as.numeric(myGenes$gc_per)
+
+Exp_val= cds$counts ## edgeR normalized count 
+myfactors=data.frame(condition=condition,batch= batch, con_batch=con_batch2)
+mydata_bA <- readData(data= Exp_val,factor=myfactors, length = mylength, gc= gc_per, chromosome = mychroms)
+mynoiseq2 = noiseq(mydata_bA, k = NULL, norm = "n", factor = "condition", pnr = 0.2,  nss = 10, v = 0.02, lc = 1, replicates = "no")
+mynoiseq.deg = degenes(mynoiseq2, q = 0.75, M = NULL)
+#[1] "41 differentially expressed features"
+
+# Table S2 # 
+
+
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+### Validation assays ###
+
+### Fluidigm vs HELP-tagging ###
+## Fluidigm_analysis file and PE_analysis_Sep2014 have file information
+
+# loading fluigdigm results
+load("/Users/msuzuki/Documents/GreallyLab/PE_project/2014_analysis/Fluidigm/J11060_combi_perMeth.robject")
+J11060 <-T46
+load("/Users/msuzuki/Documents/GreallyLab/PE_project/2014_analysis/Fluidigm/J11123_combi_perMeth.robject")
+J11123 <-T46
+merged <-merge(J11060, J11123, by=c(1,2,3),all=TRUE)
+per <-grep("_per",colnames(merged))
+meth <- cbind(merged[,1:3],merged[,per])fit
+dim(meth)
+# [1] 423  95
+
+meth2 <-cbind(meth[,1:2],meth[,3]+1,meth[,4:95])
+colnames(meth2) <-c("chr","pos-1","pos",colnames(meth)[4:95])
+
+# loading HELP-tagging results (without adjustment) #
+#Exported combi_May2014 from MySQL as csv file 
+
+angle = read.table(file="~/Documents/GreallyLab/PE_project/2015_analysis/combi_May2104.csv",sep=",",header=TRUE)
+row.names(angle)<-angle$id
+
+frag<-cbind(as.character(angle$chr),angle$pos-28,angle$pos+28,angle$id)
+write.table(frag,"~/Documents/GreallyLab/PE_project/2015_analysis/frag.bed",sep="\t",quote=F,row.names=F,col.names=F)
+#remove all HpaII sites which overpalled with RepeatMask and common SNP(142)
+#726,308 HpaII sites
+frag_ana = read.table(file="~/Documents/GreallyLab/PE_project/2015_analysis/noRepMaskSNP142_Hpa.bed",sep="\t")
+frag_ana[,2]<-frag_ana[,2]+28
+colnames(frag_ana) <-c("chr","pos","fragEnd","id")
+
+## eliminate sex chromosome information from the table #
+angle_autoX <-subset(angle,angle$chr!="chrX")
+angle_auto <-subset(angle_autoX,angle_autoX$chr!="chrY")
+
+# select only angle vaules #
+angle_only <- angle_auto[,9:75]
+name <-substr(colnames(angle_only),8,11)
+colnames(angle_only)<-name
+row.names(angle_only) <-angle_auto[,1]
+
+met1=t(angle_only)
+hc <- hclust(dist(met1), "ward.D2")
+plot(hc)
+
+#select samples which we will use for the analysis (remove duplicates, bad sequence quality samples)
+good_sample<-c(1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67)
+
+angle_only_final <-angle_only[which(row.names(angle_only)%in% frag_ana$id),good_sample]
+dim(angle_only_final)
+#[1] 693376     63
+
+met1=t(angle_only_final)
+hc <- hclust(dist(met1), "ward.D2")
+plot(hc)
+
+angle_final <-cbind(angle_auto[,1:3],angle_only_final)
+angle_final <-cbind(angle[which(angle[,1]%in%row.names(combat_edata2)),1:3], combat_edata2)
+
+
+# merge Fluidigm and HELP-tagging #
+
+merged <-merge(angle_final, meth2, by=c("chr","pos"))
+dim(merged)
+#[1]  66 159
+write.table(merged,"~/Documents/GreallyLab/PE_project/2015_analysis/merged_060915.csv",sep=",") ## original angle
+write.table(merged,"~/Documents/GreallyLab/PE_project/2015_analysis/merged_070215.csv",sep=",") ## combat adjusted
+
+
+# eliminaet low quality (contains many NA) fluidigm and not analyzable HpaII sites (SNPs, MspI_num low or contains repeyiyive elements) #
+merged <-read.table("~/Documents/GreallyLab/PE_project/2015_analysis/merged_070215.csv",sep=",",header=T)
+dim(merged)
+#[1] 33 94, 33 HpaII sites with 47 samples
+
+cor_FluHELPt <-c(cor(na.omit(cbind(merged$JG1_per, merged$JG01)),method ="spearman")[1,2],
+cor(na.omit(cbind(merged$JG4_per, merged$JG04)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG5_per, merged$JG05)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG8_per, merged$JG08)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG32_per, merged$JG32)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG39_per, merged$JG39)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG40_per, merged$JG40)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG43_per, merged$JG43)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG12_per, merged$JG12)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG41_per, merged$JG41)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG42_per, merged$JG42)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG46_per, merged$JG46)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG44_per, merged$JG44)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG48_per, merged$JG48)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG49_per, merged$JG49)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG50_per, merged$JG50)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG54_per, merged$JG54)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG65_per, merged$JG65)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG67_per, merged$JG67)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG3_per, merged$JG03)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG6_per, merged$JG06)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG23_per, merged$JG23)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG27_per, merged$JG27)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG28_per, merged$JG28)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG30_per, merged$JG30)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG33_per, merged$JG33)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG35_per, merged$JG35)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG36_per, merged$JG36)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG37_per, merged$JG37)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG51_per, merged$JG51)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG53_per, merged$JG53)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG55_per, merged$JG55)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG56_per, merged$JG56)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG57_per, merged$JG57)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG58_per, merged$JG58)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG59_per, merged$JG59)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG61_per, merged$JG61)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG62_per, merged$JG62)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG63_per, merged$JG63)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG69_per, merged$JG69)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG73_per, merged$JG73)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG80_per, merged$JG80)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG82_per, merged$JG82)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG88_per, merged$JG88)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG91_per, merged$JG91)),method ="pearson")[1,2],
+cor(na.omit(cbind(merged$JG93_per, merged$JG93)),method ="pearson")[1,2])
+
+summary(cor_FluHELPt) # "pearson"
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#-0.9014 -0.8357 -0.7882 -0.7751 -0.7448 -0.4442 
+
+##combat adjusted ##
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#-0.9254 -0.8406 -0.7958 -0.7814 -0.7232 -0.6332 
+
+
+summary(cor_FluHELPt) #"spearman"
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+# -0.8775 -0.7991 -0.7541 -0.7464 -0.7038 -0.4456 
+
+## combat adjusted ##
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#-0.8930 -0.7847 -0.7031 -0.7107 -0.6520 -0.4199 
+
+
+
+FluHELPt <-rbind(cbind(merged$JG1_per, merged$JG01), cbind(merged$JG4_per, merged$JG04), cbind(merged$JG5_per, merged$JG05),
+cbind(merged$JG8_per, merged$JG08),
+cbind(merged$JG32_per, merged$JG32),
+cbind(merged$JG39_per, merged$JG39),
+cbind(merged$JG40_per, merged$JG40),
+cbind(merged$JG43_per, merged$JG43),
+cbind(merged$JG12_per, merged$JG12),
+cbind(merged$JG41_per, merged$JG41),
+cbind(merged$JG42_per, merged$JG42),
+cbind(merged$JG46_per, merged$JG46),
+cbind(merged$JG44_per, merged$JG44),
+cbind(merged$JG48_per, merged$JG48),
+cbind(merged$JG49_per, merged$JG49),
+cbind(merged$JG50_per, merged$JG50),
+cbind(merged$JG54_per, merged$JG54),
+cbind(merged$JG65_per, merged$JG65),
+cbind(merged$JG67_per, merged$JG67),
+cbind(merged$JG3_per, merged$JG03),
+cbind(merged$JG6_per, merged$JG06),
+cbind(merged$JG23_per, merged$JG23),
+cbind(merged$JG27_per, merged$JG27),
+cbind(merged$JG28_per, merged$JG28),
+cbind(merged$JG30_per, merged$JG30),
+cbind(merged$JG33_per, merged$JG33),
+cbind(merged$JG35_per, merged$JG35),
+cbind(merged$JG36_per, merged$JG36),
+cbind(merged$JG37_per, merged$JG37),
+cbind(merged$JG51_per, merged$JG51),
+cbind(merged$JG53_per, merged$JG53),
+cbind(merged$JG55_per, merged$JG55),
+cbind(merged$JG56_per, merged$JG56),
+cbind(merged$JG57_per, merged$JG57),
+cbind(merged$JG58_per, merged$JG58),
+cbind(merged$JG59_per, merged$JG59),
+cbind(merged$JG61_per, merged$JG61),
+cbind(merged$JG62_per, merged$JG62),
+cbind(merged$JG63_per, merged$JG63),
+cbind(merged$JG69_per, merged$JG69),
+cbind(merged$JG73_per, merged$JG73),
+cbind(merged$JG80_per, merged$JG80),
+cbind(merged$JG82_per, merged$JG82),
+cbind(merged$JG88_per, merged$JG88),
+cbind(merged$JG91_per, merged$JG91),
+cbind(merged$JG93_per, merged$JG93))
+
+FluHELPt2 <-na.omit(FluHELPt)
+dim(FluHELPt2)
+#[1] 1465    2
+#[1] 1035    2 # combat
+
+cor(FluHELPt2[,1], FluHELPt2[,2],method="pearson")
+#[1] -0.7658344
+#[1] -0.7693345 # combat
+cor(FluHELPt2[,1], FluHELPt2[,2],method="spearman")
+#[1] -0.7421622
+#[1] -0.7029262 # combat 
+
+x <-c(seq(0,100))
+y <- 100-x
+png(file="~/Documents/GreallyLab/PE_project/2015_analysis/fluidigmVsHELPt.png", , width = 8, height = 6, units = "in", res = 300)
+png(file="~/Documents/GreallyLab/PE_project/2015_analysis/fluidigmVsHELPt070215combat.png", , width = 8, height = 6, units = "in", res = 300)
+plot(FluHELPt2[,1], FluHELPt2[,2]*1.1,cex=0.5,pch=19,ylim=c(2,100),xlim=c(2,100),xlab="Bisulphite Fluidigm",ylab="HELP-tagging")
+#abline(lm(FluHELPt2[,1]~FluHELPt2[,2]),col=2)
+lines(x,y,col=2)
+#lines(x-10,y-10,col=2)
+#lines(x+10,y+10,col=2)
+invisible(capture.output(dev.off()))
+
+smoothScatter(FluHELPt2[,1], FluHELPt2[,2]*1.1)
+
+###
+
+### modules used ##
+source /apps1/modules/init/bash
+module load picard/1.96
+module load samtools/intel/0.1.19
+module load bismark/0.9.0
+module load bedtools/intel/2.19.1
+module load rseg/intel/0.4.3
+module load bedtools/intel/2.19.1
+##### run R on the server #####
+source /apps1/modules/init/sh
+module load R/intel/3.0.1
+R CMD BATCH --no-restore ~/var.Rscript
+###############################
