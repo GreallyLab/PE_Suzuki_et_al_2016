@@ -20,5 +20,5 @@ Data sets are available publically at the Gene Expression Omnibus (GEO) database
   "submission_htseq.union.out.txt"
 
 # file(s) request 
-"angle_only_final.txt","batch.txt" and "submission_htseq.union.out.txt" are available upon a request.
+All files are available upon a request.
 
